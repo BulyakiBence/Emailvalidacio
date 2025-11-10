@@ -1,62 +1,52 @@
 def validate_email(email):
-    # 1. At least one '@'
     if '@' not in email:
-        print("An email address has to contain a '@' character!")
+        print("Az emailben lennie kell @-nak!")
         return
 
-    # 2. Only one '@'
     if email.count('@') > 1:
-        print("An email address cannot contain more than one '@' characters!")
+        print("Egy emailben nem lehet egynél tóbb @!")
         return
 
     username, domain = email.split('@')
 
-    # 3. Username is not empty
     if username == "":
-        print("The username before the '@' character cannot be empty!")
+        print("A felhasználónév a @ előtt nem lehet üres!")
         return
 
-    # 4. Domain is not empty
     if domain == "":
-        print("The domain after the '@' character cannot be empty!")
+        print("A domain a @ után nem lehet üres!")
         return
 
-    # 5. At least one '.'
     if '.' not in email:
-        print("An email address has to contain at least one '.' character!")
+        print("Hiányzik a . az emailból!")
         return
 
-    # 6. At least one '.' in domain
     if '.' not in domain:
-        print("The domain has to contain at least one '.' character!")
+        print("A domainből hiányzik a .!")
         return
 
-    # 7. Top-level domain is not empty
     if domain.endswith('.'):
-        print("The top-level domain cannot be empty!")
+        print("A top-level domain vége nem lehet üres!")
         return
 
-    # 8. TLD is at least two characters long
+    
     tld = domain.split('.')[-1]
     if len(tld) < 2:
-        print("The top-level domain has to be at least two characters long!")
+        print("A top-level domainnak minimum 2 karakter hosszúnak kell lennie!")
         return
 
-    # 9. Valid username
     if username.startswith('.'):
-        print("The username cannot start with a '.' character!")
+        print("A felhasználónév nem kezdődhet .-tal!")
         return
 
-    # 10. Valid server name
     if domain.startswith('.'):
-        print("The domain cannot start with a '.' character!")
+        print("A domain nem kezdődhet .-tal!")
         return
+    
+    print("Valid email cím :)")
 
-    # 11. Valid email address
-    print("Valid email address :)")
 
-
-# --- Tesztelés ---
+''' --- Tesztelés ---
 test_emails = [
     "hello.worldcom",        # nincs @
     "he@@llo@@worldcom",     # több @
@@ -70,8 +60,11 @@ test_emails = [
     "he.llo@.world.com",     # domain ponttal kezdődik
     "hello@world.com"        # helyes email
 ]
+'''
 
+'''
 for e in test_emails:
     print(f"Testing: {e}")
     validate_email(e)
     print("-" * 50)
+'''
