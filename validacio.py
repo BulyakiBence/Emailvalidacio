@@ -1,70 +1,55 @@
-def validate_email(email):
-    if '@' not in email:
-        print("Az emailben lennie kell @-nak!")
-        return
 
-    if email.count('@') > 1:
-        print("Egy emailben nem lehet egynél tóbb @!")
-        return
+# 0. Bekérek egy email címet
+email = input("Add meg az e-mail címet: ")
 
+# 1. Legalább egy '@' karakter
+if email.count('@') == 0:
+    print("Kell minimum egy '@' az esmil címbe!")
+
+# 2. Legfeljebb egy '@' karakter
+elif email.count('@') > 1:
+    print("EGy email címben nem lehet egynél több '@'!")
+
+else:
+    # Felbontom az e-mail címet a kukacnál
     username, domain = email.split('@')
 
+    # 3. Felhasználónév nem lehet üres
     if username == "":
-        print("A felhasználónév a @ előtt nem lehet üres!")
-        return
+        print("A '@' előtti felhasználónév nem lehet üres!")
 
-    if domain == "":
-        print("A domain a @ után nem lehet üres!")
-        return
+    # 4. Domain nem lehet üres
+    elif domain == "":
+        print("A '@' utáni domain nem lehet üres")
 
-    if '.' not in email:
-        print("Hiányzik a . az emailból!")
-        return
+    # 5. Legalább egy '.' karakter az e-mailben
+    elif '.' not in email:
+        print("Minimum egy . kell egy email címbe!")
 
-    if '.' not in domain:
-        print("A domainből hiányzik a .!")
-        return
+    # 6. Legalább egy '.' a domain részben
+    elif '.' not in domain:
+        print("A domainmben legalább egy .-nak kell lennie!")
 
-    if domain.endswith('.'):
-        print("A top-level domain vége nem lehet üres!")
-        return
+    # 7. Domain nem végződhet '.'-ra
+    elif domain.endswith('.'):
+        print("A top-level domain nem végződhet .-ra!")
 
-    
-    tld = domain.split('.')[-1]
-    if len(tld) < 2:
-        print("A top-level domainnak minimum 2 karakter hosszúnak kell lennie!")
-        return
+    else:
+        # TLD (top-level domain) = az utolsó pont utáni rész
+        tld = domain.split('.')[-1]
 
-    if username.startswith('.'):
-        print("A felhasználónév nem kezdődhet .-tal!")
-        return
+        # 8. TLD legalább 2 karakter hosszú
+        if len(tld) < 2:
+            print("A top-level domainnak minimum 2 karakter hosszúságúnak kell lennie!")
 
-    if domain.startswith('.'):
-        print("A domain nem kezdődhet .-tal!")
-        return
-    
-    print("Valid email cím :)")
+        # 9. Felhasználónév nem kezdődhet '.'
+        elif username.startswith('.'):
+            print("A felhasználónév nem kezdődhet .-tal!")
 
+        # 10. Domain nem kezdődhet '.'
+        elif domain.startswith('.'):
+            print("A domain nem kezdődhet .-tal!")
 
-''' --- Tesztelés ---
-test_emails = [
-    "hello.worldcom",        # nincs @
-    "he@@llo@@worldcom",     # több @
-    "@@world.com",           # üres username
-    "hello@",                # üres domain
-    "hello@@worldcom",       # nincs .
-    "hell.o@@worldcom",      # domainben nincs .
-    "hello@@worldcom.",      # üres TLD
-    "hello@@worldco.m",      # TLD < 2 karakter
-    ".hello@@world.com",     # username ponttal kezdődik
-    "he.llo@.world.com",     # domain ponttal kezdődik
-    "hello@world.com"        # helyes email
-]
-'''
-
-'''
-for e in test_emails:
-    print(f"Testing: {e}")
-    validate_email(e)
-    print("-" * 50)
-'''
+        # 11. Ha minden rendben
+        else:
+            print("Valid email cím :)")
