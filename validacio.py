@@ -1,4 +1,4 @@
-import 
+ 
 # 0. Bekérek egy email címet
 email = input("Add meg az e-mail címet: ")
 
