@@ -32,7 +32,7 @@ else:
 
     # 7. Domain nem végződhet '.'-ra
     elif domain.endswith('.'):
-        print("A top-level domain nem végződhet .-ra!")
+        print("A  domain nem végződhet .-ra!")
 
     else:
         # TLD (top-level domain) = az utolsó pont utáni rész
